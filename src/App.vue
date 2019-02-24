@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       returnedText: 'Dog',
-      sentence: ["I", "am", "dog"],
+      sentence: ["I ", "am ", "dog"],
     }
   },
   name: 'app',
@@ -34,9 +34,8 @@ export default {
     feedBraille({ text }) {
       // Perform a regex on the string to make it clean
       let cleanText = text.replace(/^([a-zA-Z0-9 _-]+)$/, '').replace(/\r?\n|\r/g, ' ')
-      console.log(cleanText);
-      console.log("SET SENTENCE")
-      this.sentence = cleanText.split(' ');
+      this.sentence = cleanText.trim().split(/([' '])/g);
+      console.log(this.sentence)
     }
   },
   mounted() {
