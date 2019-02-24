@@ -26,6 +26,14 @@
         <b-btn @click="changeIndex(1)" :disabled="currentIndex == (word.length - 1)">Next</b-btn>
       </b-col>
     </b-row>
+    <b-row class="my-4 text-center">
+      <b-col>
+        <b-btn-group>
+          <b-btn variant="primary" @click="swipeToggle" :pressed.sync="swipeToggle">Swipe to Change</b-btn>
+          <b-btn variant="primary" @click="tiltToggle" :pressed.sync="tiltToggle">Tilt to Change</b-btn>
+        </b-btn-group>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -44,6 +52,8 @@ export default {
   },
   data() {
     return {
+      swipeToggle: true,
+      tiltToggle: true,
       currentIndex: 0,
       matrix: null,
       text: null, 
@@ -73,12 +83,18 @@ export default {
     }
   },
   methods: {
+    toggleTilt() {
+      this.tiltToggle = !this.tiltToggle;
+    },
+    toggleSwipe() {
+      this.swipeToggle = !this.swipeToggle;
+    },
     rotateDevice({ beta, gamma }) {
       this.gamma += (gamma - this.gamma) / 5;
       // let changeX = (beta - this.beta) / 5;
-      if (gamma >= 25) {
+      if (gamma >= 25 && this.tiltToggle) {
         this.changeIndex(1);
-      } else if (gamma <= -25) {
+      } else if (gamma <= -25 && this.tiltToggle) {
         this.changeIndex(-1);
       }
     },
@@ -137,10 +153,12 @@ export default {
 
       if (Math.abs(diffX) > Math.abs(diffY)) {
         // Sliding horizontally
-        if (diffX > 0) {
+        if (diffX > 20 & this.swipeToggle) {
           this.text = "Left";
-        } else {
+          this.changeIndex(-1)
+        } else if (diffX < -20 & this.swipeToggle) {
           this.text = "Right";
+          this.changeIndex(1)
         }
       } else {
         if (diffY > 0) {
