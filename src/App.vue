@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <b-container fluid class='m-4'>
-      <swipe-block word='Dog'></swipe-block>
+      <b-row class='mb-4'>
+        <b-col>
+          <CaptureButton></CaptureButton>
+        </b-col>
+      </b-row>
+      <swipe-block :sentence="sentence" :word='returnedText'></swipe-block>
     </b-container>
     <info-api></info-api>
   </div>
@@ -10,13 +15,33 @@
 <script>
 import SwipeBlock from './components/SwipeBlock.vue';
 import InfoApi from './components/info.vue';
+import CaptureButton from './components/CaptureButton.vue';
 
 export default {
+  data() {
+    return {
+      returnedText: 'Dog',
+      sentence: ["I", "am", "dog"],
+    }
+  },
   name: 'app',
   components: {
     SwipeBlock,
-    InfoApi
+    InfoApi,
+    CaptureButton
   },
+  methods: {
+    feedBraille({ text }) {
+      // Perform a regex on the string to make it clean
+      let cleanText = text.replace(/^([a-zA-Z0-9 _-]+)$/, '').replace(/\r?\n|\r/g, ' ')
+      console.log(cleanText);
+      console.log("SET SENTENCE")
+      this.sentence = cleanText.split(' ');
+    }
+  },
+  mounted() {
+    this.$root.$on('image-decoded', this.feedBraille);
+  }
 };
 </script>
 
