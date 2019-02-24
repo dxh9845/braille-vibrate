@@ -18,6 +18,11 @@ export default {
 </script>
 
 <style>
+
+html, body {
+  overscroll-behavior: none;
+}
+
 #app {
 /*   
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -26,6 +31,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px; */
+  overscroll-behavior: none;
   height: 90vh;
   display: flex;
   justify-content: center;
