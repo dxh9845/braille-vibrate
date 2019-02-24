@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <swipe-block></swipe-block>
+    <b-container fluid class='m-4'>
+      <swipe-block word='Dog'></swipe-block>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
 import SwipeBlock from './components/SwipeBlock.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
     SwipeBlock
   },
 };
