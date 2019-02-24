@@ -3,16 +3,19 @@
     <b-container fluid class='m-4'>
       <swipe-block word='Dog'></swipe-block>
     </b-container>
+    <info-api></info-api>
   </div>
 </template>
 
 <script>
 import SwipeBlock from './components/SwipeBlock.vue';
+import InfoApi from './components/info.vue';
 
 export default {
   name: 'app',
   components: {
-    SwipeBlock
+    SwipeBlock,
+    InfoApi
   },
 };
 </script>
@@ -24,7 +27,7 @@ html, body {
 }
 
 #app {
-/*   
+/*
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
