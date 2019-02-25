@@ -8,13 +8,11 @@
       </b-row>
       <swipe-block :sentence="sentence" :word='returnedText'></swipe-block>
     </b-container>
-    <info-api></info-api>
   </div>
 </template>
 
 <script>
 import SwipeBlock from './components/SwipeBlock.vue';
-import InfoApi from './components/info.vue';
 import CaptureButton from './components/CaptureButton.vue';
 
 export default {
@@ -27,7 +25,6 @@ export default {
   name: 'app',
   components: {
     SwipeBlock,
-    InfoApi,
     CaptureButton
   },
   methods: {
